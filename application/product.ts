@@ -1,7 +1,7 @@
 interface ProductInterface {
   IsValid(): boolean;
-  Enable(): void;
-  Disable(): void;
+  Enable(): string;
+  Disable(): string;
   GetID(): number;
   GetName(): string;
   GetStatus(): string;
@@ -23,15 +23,34 @@ class Product implements ProductInterface {
   }
 
   IsValid(): boolean {
-    return this.id > 0;
+    if (this.status === "") {
+      this.status = "disabled";
+    }
+    if (this.status !== "enabled" && this.status !== "disabled") {
+      return false;
+    }
+    if (this.price < 0) {
+      return false;
+    }
+    return true;
   }
 
-  Enable(): void {
-    this.status = "enabled";
+  Enable(): string {
+    if (this.price > 0) {
+      this.status = "enabled";
+      return this.status;
+    } else {
+      throw new Error("the price must be greater than 0 to enable the product");
+    }
   }
 
-  Disable(): void {
-    this.status = "disabled";
+  Disable(): string {
+    if (this.price === 0) {
+      this.status = "disabled";
+      return this.status;
+    } else {
+      throw new Error("the price must be equal to 0 to disable the product");
+    }
   }
 
   GetID(): number {

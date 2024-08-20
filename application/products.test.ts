@@ -34,6 +34,7 @@ describe("Product", () => {
   });
 
   test("should disable the product correctly", () => {
+    product.ChangePrice(0);
     product.Disable();
     expect(product.GetStatus()).toBe("disabled");
   });
@@ -41,9 +42,29 @@ describe("Product", () => {
   test("should return true when the product is valid", () => {
     expect(product.IsValid()).toBe(true);
   });
+});
 
-  test("should return false when the product is invalid", () => {
-    const invalidProduct = new Product(0, "Produto 1", "enabled", 100);
-    expect(invalidProduct.IsValid()).toBe(false);
+describe("Product error", () => {
+  test("should throw an error when enabling a product with a price less than or equal to 0", () => {
+    const product = new Product(1, "Produto 1", "enabled", 0);
+    expect(() => product.Enable()).toThrowError(
+      "the price must be greater than 0 to enable the product"
+    );
+  });
+  test("should throw an error when disabling a product with a price greater than 0", () => {
+    const product = new Product(1, "Produto 1", "enabled", 100);
+
+    expect(() => product.Disable()).toThrowError(
+      "the price must be equal to 0 to disable the product"
+    );
+  });
+
+  test("should return false when the product is invalid (price)", () => {
+    const product = new Product(1, "Produto 1", "enabled", -1);
+    expect(product.IsValid()).toBe(false);
+  });
+  test("should return false when the product is invalid (status)", () => {
+    const product = new Product(1, "Produto 1", "invalid", 100);
+    expect(product.IsValid()).toBe(false);
   });
 });
