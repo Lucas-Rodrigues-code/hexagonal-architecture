@@ -37,4 +37,13 @@ describe("Product", () => {
     product.Disable();
     expect(product.GetStatus()).toBe("disabled");
   });
+
+  test("should return true when the product is valid", () => {
+    expect(product.IsValid()).toBe(true);
+  });
+
+  test("should return false when the product is invalid", () => {
+    const invalidProduct = new Product(0, "Produto 1", "enabled", 100);
+    expect(invalidProduct.IsValid()).toBe(false);
+  });
 });
