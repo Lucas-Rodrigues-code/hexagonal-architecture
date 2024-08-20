@@ -9,51 +9,50 @@ interface ProductInterface {
   ChangePrice(price: number): void;
 }
 
-class Product implements ProductInterface { 
-    private id: number;
-    private name: string;
-    private status: string;
-    private price: number;
-    
-    constructor(id: number, name: string, status: string, price: number) {
-        this.id = id;
-        this.name = name;
-        this.status = status;
-        this.price = price;
-    }
-    
-    IsValid(): boolean {
-        return this.id > 0;
-    }
-    
-    Enable(): void {
-        this.status = 'enabled';
-    }
-    
-    Disable(): void {
-        this.status = 'disabled';
-    }
-    
-    GetID(): number {
-        return this.id;
-    }
-    
-    GetName(): string {
-        return this.name;
-    }
-    
-    GetStatus(): string {
-        return this.status;
-    }
-    
-    GetPrice(): number {
-        return this.price;
-    }
-    
-    ChangePrice(price: number): void {
-        this.price = price;
-    }
+class Product implements ProductInterface {
+  private id: number;
+  private name: string;
+  private status: string;
+  private price: number;
+
+  constructor(id: number, name: string, status: string, price: number) {
+    this.id = id;
+    this.name = name;
+    this.status = status;
+    this.price = price;
+  }
+
+  IsValid(): boolean {
+    return this.id > 0;
+  }
+
+  Enable(): void {
+    this.status = "enabled";
+  }
+
+  Disable(): void {
+    this.status = "disabled";
+  }
+
+  GetID(): number {
+    return this.id;
+  }
+
+  GetName(): string {
+    return this.name;
+  }
+
+  GetStatus(): string {
+    return this.status;
+  }
+
+  GetPrice(): number {
+    return this.price;
+  }
+
+  ChangePrice(price: number): void {
+    this.price = price;
+  }
 }
 
-const produto = new Product(1, 'Produto 1', 'enabled', 100);
-
+export { Product };
